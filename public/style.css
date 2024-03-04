@@ -1,0 +1,255 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+@keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .gradient {
+    position: fixed;
+    z-index: 1;
+    --size: 290px;
+    --speed: 20s;
+    --easing: cubic-bezier(0.8, 0.2, 0.2, 0.8);
+  
+    width: var(--size);
+    height: var(--size);
+    filter: blur(calc(var(--size) / 5));
+    background-image: linear-gradient(hsl(190, 84%, 46%), hsl(283, 79%, 41%));
+    animation: rotate var(--speed) var(--easing) alternate infinite;
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  }
+  
+  @media (min-width: 720px) {
+    .gradient {
+      --size: 500px;
+    }
+  }
+  
+  body {
+    background-color: #222;
+    position: absolute;
+    inset: 0;
+    display: flex;
+    place-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+  
+  /* This is just to transition when you change the viewport size. */
+  * {
+    transition: all 0.25s ease-out;
+  }
+  
+
+html, body {
+    height: auto;
+    overflow: auto;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+.container {
+    text-align: center;
+    border: 2px solid #f0f0f0;
+    padding: 40px;
+    border-radius: 8px;
+    z-index: 2;
+}
+
+.container h1 {
+    font-family: 'Playfair Display', serif;
+    color:#ffffff;
+    font-size: 50px;
+}
+
+
+#drop-area {
+    background-color: #dddbdb;
+    opacity: 70%;
+    padding: 40px;
+    cursor: pointer;
+    margin-top: 20px;
+    border-radius: 8px;
+}
+
+#drop-area p {
+    margin: 0;
+    font-weight: 600;
+    color: #474545;
+}
+
+input[type="file"] {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+#gallery img {
+    max-width: 100%; /* Makes sure the image is no wider than its parent */
+    max-height: 300px; /* Adjust this value based on your desired maximum height */
+    height: auto; /* Ensures the height scales proportionally */
+    padding-top: 20px;
+    margin: 0 auto; /* Centers the image within the gallery div if it is smaller than the parent */
+}
+
+footer {
+    margin-top: 30px;
+    padding-top: 20px;
+    color: #fefefe;
+    border-top: 1px solid #f0f0f0;
+    font-size: 14px;
+}
+
+footer a {
+    color: #ca4ef7;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+#priceRange {
+    margin-top: 20px;
+    margin-left: 15px;
+}
+
+.max-price-label {
+    color: #ffffff;
+}
+
+#priceValue {
+    font-weight: bold;
+    display: inline-block;
+    width: 50px; 
+}
+
+#goButton {
+    display: inline-block; /* Makes the button a block-level element, which takes up the full width */
+    margin-top: 20px; /* Adjust as needed for space above the button */
+    margin-bottom: 10px; /* Adjust as needed for space below the button */
+    padding: 10px 20px; /* Adjust as needed for padding inside the button */
+    background-color: #8d2dd5; /* Adjust color as needed */
+    color: white; /* Text color */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Hand cursor on hover */
+    font-size: 16px; /* Adjust as needed */
+    font-weight: bold; /* Bold text */
+    font-family: 'Poppins', sans-serif;
+}
+
+#goButton:hover {
+    background-color: #2f0360; /* Slightly darker shade on hover */
+}
+
+
+#gallery2 img {
+    max-width: 100%; /* Makes sure the image is no wider than its parent */
+    max-height: 300px; /* Adjust this value based on your desired maximum height */
+    height: auto; /* Ensures the height scales proportionally */
+    margin: 0 auto; /* Centers the image within the gallery div if it is smaller than the parent */
+}
+
+#gallery2 {
+    display: flex; /* Use Flexbox to lay out children side by side */
+    justify-content: center; /* Center children horizontally */
+    align-items: flex-start; /* Align children to the start of the flex container vertically */
+    flex-wrap: wrap; /* Allow items to wrap as needed */
+    gap: 20px; /* Add some space between the items */
+}
+
+.match {
+    flex: 1; /* Each match element can grow to fill available space */
+    max-width: calc(33.333% - 20px); /* Aim for three items per row, accounting for gap */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Optional: Adds some depth */
+    padding: 10px; /* Add some padding around the content */
+    border-radius: 8px; /* Optional: Rounds the corners */
+    background-color: #fff; /* Change according to your design */
+    text-align: center; /* Center the text inside each match */
+}
+
+.match img {
+    width: 100%; /* Make images responsive */
+    height: auto; /* Maintain aspect ratio */
+    max-height: 200px; /* Restrict images from becoming too tall */
+    object-fit: cover; /* Ensure the images cover the area nicely */
+}
+
+.match h3, .match p {
+    margin: 5px 0; /* Add some vertical spacing between text elements */
+}
+
+
+.spinner {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top: 4px solid #aa3ef1;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 2s linear infinite;
+    margin: 0 auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#loadingSpinner {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+#loadingSpinner p {
+    margin-top: 15px;
+    font-size: 15px;
+    color: #fff; /* Adjust color as needed */
+}
+
+.match {
+    position: relative;
+    display: inline-block; /* or 'block' if you prefer */
+    margin: 10px;
+}
+
+.similarity-score {
+    display: none; /* Hide by default */
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    color: #FFF;
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black */
+    padding: 5px;
+    border-radius: 2px;
+}
+
+.match:hover .similarity-score {
+    display: block; /* Show on hover */
+}
+
+#resultsHeading {
+    font-family: 'Playfair Display', serif;
+    display: none;
+    color: #FFF; 
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 20px; 
+    font-size: 28px; 
+}
