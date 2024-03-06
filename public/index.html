@@ -19,6 +19,10 @@
             <label for="priceRange"><span class="max-price-label">Max Price: <span id="priceValue">$4000</span></span></label>
             <input type="range" id="priceRange" name="priceRange" min="0" max="8000" value="4000" step="500" oninput="updatePriceValue(this.value)">
         </div>
+        <div class="keyword">
+            <label for="keyword">Keywords:</label>
+            <input type="text" id="keyword" name="keyword" placeholder="Optional keywords">
+        </div>
         <button id="goButton">Find Matches</button>
         <div id="loadingSpinner" style="display: none; text-align: center;">
             <div class="spinner"></div>

@@ -58,6 +58,9 @@ function uploadFile(file) {
 
     const maxPrice = document.getElementById('priceRange').value;
     formData.append('maxPrice', maxPrice);
+    
+    const keyword = document.getElementById('keyword').value;
+    formData.append('keyword', keyword);
 
     document.getElementById('loadingSpinner').style.display = 'block';
 
@@ -119,5 +122,7 @@ function displayResult(matches) {
 
         // Append the container to the gallery
         gallery.appendChild(matchElement);
+
+        window.scrollTo(0, 0); // Scrolls to the top of the page
     });
 }

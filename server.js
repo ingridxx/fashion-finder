@@ -22,6 +22,7 @@ app.use(express.static('public')); // Serve static files from 'public' directory
 // Route to handle file upload
 app.post('/upload', upload.single('image'), async (req, res) => {
     const maxPrice = req.body.maxPrice;
+    const keyword = req.body.keyword;
 
     if (req.file) {
         const tempFilePath = path.join(os.tmpdir(), req.file.originalname);
@@ -45,7 +46,7 @@ app.post('/upload', upload.single('image'), async (req, res) => {
             
             try {
                 const embedding = JSON.parse(dataString); // Parse the embedding JSON from Python script
-                const topMatches = await findTopMatches(embedding, 'model', maxPrice);
+                const topMatches = await findTopMatches(embedding, 'cutout', maxPrice, keyword);
                 // Respond with the top matches
                 res.json(topMatches);
             } catch (error) {
@@ -95,7 +96,7 @@ async function main() {
 
 main();
 
-async function findTopMatches(queryEmbedding, embeddingType = 'model', maxPrice) {
+async function findTopMatches(queryEmbedding, embeddingType = 'model', maxPrice, keyword) {
     const connection = await mysql.createConnection({
         host: HOST,
         user: USER,
@@ -108,7 +109,21 @@ async function findTopMatches(queryEmbedding, embeddingType = 'model', maxPrice)
 
     await connection.execute(setVectorQuery);
 
-    const query = `
+    let results = null;
+
+    if (keyword) {
+        const query = `
+        SELECT brand_name, image_cutout_url, short_description, price, DOT_PRODUCT(${embeddingType}_embedding, @query_vec) AS similarity_score
+        FROM farfetch_listings
+        WHERE price < ?
+        AND MATCH (short_description) AGAINST (?)
+        ORDER BY similarity_score DESC
+        LIMIT 3;
+    `;
+    [results] = await connection.execute(query, [maxPrice, keyword]);
+
+    } else {
+        const query = `
         SELECT brand_name, image_cutout_url, short_description, price, DOT_PRODUCT(${embeddingType}_embedding, @query_vec) AS similarity_score
         FROM farfetch_listings
         WHERE price < ?
@@ -116,7 +131,9 @@ async function findTopMatches(queryEmbedding, embeddingType = 'model', maxPrice)
         LIMIT 3;
     `;
 
-    const [results] = await connection.execute(query, [maxPrice]);
+    [results] = await connection.execute(query, [maxPrice]);
+
+    }
 
     await connection.end();
 

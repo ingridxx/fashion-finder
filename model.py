@@ -18,7 +18,7 @@ connection = singlestoredb.connect(**conn_params)
 
 # first 10k rows
 path = '/Users/ingridxu/Downloads/archive (1)/current_farfetch_listings.csv'
-skip_rows = list(range(1,24028))
+skip_rows = list(range(1,34028))
 articles = pd.read_csv(
     path,
     skiprows=skip_rows,
