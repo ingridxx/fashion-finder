@@ -1,7 +1,7 @@
 # fashion-finder
 A web app that lets you do image search with fashion items and receive recommendations of similar listings from Farfetch.
 
-<img width="786" alt="image" src="https://github.com/ingridxx/fashion-finder/assets/33936049/ed704fec-95ed-4e8e-92c4-f7cf04a139de">
+<img width="450" alt="image" src="https://github.com/ingridxx/fashion-finder/assets/33936049/ed704fec-95ed-4e8e-92c4-f7cf04a139de">
 
 ## Setup
 ### Dataset
