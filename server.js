@@ -8,9 +8,10 @@ const { spawn } = require('child_process');
 const { promisify } = require('util');
 const writeFileAsync = promisify(fs.writeFile);
 const unlinkAsync = promisify(fs.unlink);
-
+const cors = require('cors');
 
 const app = express();
+app.use(cors());
 const port = 3000;
 
 // Set up storage engine
@@ -19,6 +20,10 @@ const upload = multer({ storage: storage });
 
 app.use(express.static('public')); // Serve static files from 'public' directory
 
+// Test route.
+app.get('/test', (req, res) => {
+    res.status(200).send('OK');
+});
 // Route to handle file upload
 app.post('/upload', upload.single('image'), async (req, res) => {
     const maxPrice = req.body.maxPrice;
