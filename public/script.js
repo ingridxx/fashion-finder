@@ -64,7 +64,7 @@ function uploadFile(file) {
 
     document.getElementById('loadingSpinner').style.display = 'block';
 
-    fetch('/upload', {
+    fetch('https://basically-lenient-mackerel.ngrok-free.app/upload', {
         method: 'POST',
         body: formData,
     })
